@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="JSB" />
+        <title>Python tutos</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <script>
+            /*
+             * Valide si la réponse cochée est bien celle demandée.
+             * @param int questionnaire
+             */
+        function valider(questionnaire){
+            id_reponse= document.getElementById('q_'+questionnaire+'_reponse').value;
+            if(document.getElementById('q_'+questionnaire+'_reponse_'+id_reponse).checked){
+                alert('Bonne réponse chef !');
+            }
+            else{
+                // Vérifie que quelque chose a été coché:
+                var radios = document.getElementsByName('q_'+questionnaire+'_reponse_radio');
+                
+                un_coche= false;
+                
+                for (var i = 0, length = radios.length; i < length; i++) {
+                    if (radios[i].checked) {
+                      un_coche= true;
+                      break;
+                    }
+                }
+                
+                if(un_coche){
+                    alert('Mauvaise réponse');
+                    
+                    // Afficher la solution :
+                    document.getElementById('q_'+questionnaire+'_solution').style.display = 'block';
+                }
+                else
+                {
+                    alert('Choisit une possibilité, on sait jamais. ^^');
+                }
+            }
+        }
+        
+        /*
+         * Valide si une réponse est correcte, dans le cas de valider un texte.
+         */
+        function valider_texte(questionnaire){
+            valeur_reponse= document.getElementById('q_'+questionnaire+'_reponse').value;
+            if(document.getElementById('q_'+questionnaire+'_reponse_1').value == valeur_reponse){
+                alert('Bien trouvé !');
+            }
+            else if(document.getElementById('q_'+questionnaire+'_reponse_1').value == ""){
+                alert('Pourquoi pas essayer. ^^');
+            }
+            else{
+                alert('Mauvais réponse.');
+                
+                // Afficher la solution :
+                document.getElementById('q_'+questionnaire+'_solution').style.display = 'block';
+            }
+        }
+        </script>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">
+                <span class="d-block d-lg-none">Tuto Python</span>
+                <span class="d-none d-lg-block"><img class="img-fluid img-profile rounded-circle mx-auto mb-2" src="assets/img/profile.jpg" alt="" /></span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#apropos">A propos</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#affichage">Affichage</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#variable">Variables</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#saisie">Saisie / input</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#condition">Condition / if-else</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#boucle_while">Boucle / while</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#boucle_for">Boucle compteur / for</a></li>
+                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#fonction">Fonctions / def</a></li>
+                </ul>
+            </div>
+        </nav>
+        
+        <!-- Page Content-->
+        <div class="container-fluid p-0">
+            <!-- About-->
+            <section class="resume-section" id="apropos">
+                <div class="resume-section-content">
+                    <h1 class="mb-0">
+                        Tuto
+                        <span class="text-primary">Python</span>
+                    </h1>
+                    <div class="subheading mb-5">
+                        Le meilleur tuto du monde ! :)
+                    </div>
+                    <p class="lead mb-5">Quelques petits entrainement de codage en Python, vous verrez c'est pas compliqué ! <img src="assets/img/smile-degueu.jpg" style="height: 40px"></p>
+                </div>
+            </section>
+            
+            <hr class="m-0" />
+            <!-- Afficher-->
+            <section class="resume-section" id="affichage">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Affichage</h2>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Comment afficher un message à l'écran ?</h3>
+                            <div class="subheading mb-3">Choisit <u><strong>la</strong></u> bonne réponse.</div>
+                            <form action="javascript:valider('01');">
+                                <input type='radio' id="q_01_reponse_1" name='q_01_reponse_radio'> <label for="q_01_reponse_1"><code>print("L'Attaque Des Titans est le meilleur manga !")</code></label><br>
+                                <input type='radio' id="q_01_reponse_2" name='q_01_reponse_radio'> <label for="q_01_reponse_2"><code>print(Dragon Ball c'est null !)</code></label><br>
+                                <input type='radio' id="q_01_reponse_3" name='q_01_reponse_radio'> <label for="q_01_reponse_3"><code>"Vive les Pokémons !!!"</code></label><br>
+                                <input type='radio' id="q_01_reponse_4" name='q_01_reponse_radio'> <label for="q_01_reponse_4"><code>System.out.println("On parle des comics ?");</code></label><br>
+                                
+                                <input type='hidden' value='1' name='q_01_reponse' id='q_01_reponse'>
+                                <input type='submit' value='Valider' class="btn btn-primary">
+                            </form>
+                            <br>
+                            <span style="display:none" id="q_01_solution">
+                                <div>
+                                    <p>Solution : 01.</p>
+                                    <p>La question n'est pas de savoir si Pokémon ou Dragon Ball sont bons ou mauvais mais d'utiliser la bonne syntaxe pour afficher un message.</p>
+                                    <p>La bonne syntaxe est : <code>print("le message à afficher")</code>, le mot clef <code>print</code> puis des <code>()</code> où on indique dedans ce qu'on veut afficher.</p>
+                                    <p>Il faut mettre entre <code>" "</code> (guillemets) le texte à afficher sinon cela le fonctionne pas.</p>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <hr class="m-0" />
+            <!-- Variables-->
+            <section class="resume-section" id="variable">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Variables</h2>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Comment créer une variable ?</h3>
+                            <div class="subheading mb-3">Choisit <u><strong>la</strong></u> bonne réponse.</div>
+                            <form action="javascript:valider('02');">
+                                <input type='radio' id="q_02_reponse_1" name='q_02_reponse_radio'> <label for="q_02_reponse_1"><code>public final static String varible;</code></label><br>
+                                <input type='radio' id="q_02_reponse_2" name='q_02_reponse_radio'> <label for="q_02_reponse_2"><code>var ninja;</code></label><br>
+                                <input type='radio' id="q_02_reponse_3" name='q_02_reponse_radio'> <label for="q_02_reponse_3"><code>x = 2</code></label><br>
+                                <input type='radio' id="q_02_reponse_4" name='q_02_reponse_radio'> <label for="q_02_reponse_4"><code>created variable title name; // It's good for you. ;)</code></label><br>
+                                
+                                <input type='hidden' value='3' name='q_02_reponse' id='q_02_reponse'>
+                                <input type='submit' value='Valider' class="btn btn-primary">
+                            </form>
+                            <br>
+                            <span style="display:none" id="q_02_solution">
+                                <div>
+                                    <p>Solution : 03.</p>
+                                    <p>En Python il suffit de donner un <code>nom de variable</code> et mettre un <code>=</code> pour <u>affecter</u> une valeur.</p>
+                                    <p><u><strong>affecter</strong></u> : verbe savant pour dire qu'on donne une valeur à quelque chose. Contexte ici : donner une valeur à une variable.</p>
+                                    <p>Dans l'exemple ici : on donne la valeur <code>2</code> à la variable <code>x</code>.</p>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <hr class="m-0" />
+            <!-- Saisie-->
+            <section class="resume-section" id="saisie">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Saisie / input</h2>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Comment permettre une saisie clavier et l'affecter à une variable ?</h3>
+                            <div class="subheading mb-3">Choisit <u><strong>la</strong></u> bonne réponse.</div>
+                            <form action="javascript:valider('03');">
+                                <input type='radio' id="q_03_reponse_1" name='q_03_reponse_radio'> <label for="q_03_reponse_1"><code>variable = input()</code></label><br>
+                                <input type='radio' id="q_03_reponse_2" name='q_03_reponse_radio'> <label for="q_03_reponse_2"><code>var ninja;</code></label><br>
+                                <input type='radio' id="q_03_reponse_3" name='q_03_reponse_radio'> <label for="q_03_reponse_3"><code>x = 2</code></label><br>
+                                <input type='radio' id="q_03_reponse_4" name='q_03_reponse_radio'> <label for="q_03_reponse_4"><code>created variable title name; // It's good for you. ;)</code></label><br>
+                                
+                                <input type='hidden' value='1' name='q_03_reponse' id='q_03_reponse'>
+                                <input type='submit' value='Valider' class="btn btn-primary">
+                            </form>
+                            <br>
+                            <span style="display:none" id="q_03_solution">
+                                <div>
+                                    <p>Solution : 01.</p>
+                                    <p>En Python il suffit de donner un <code>nom de variable</code> et mettre un <code>=</code> pour <u>affecter</u> une valeur.</p>
+                                    <p><u><strong>affecter</strong></u> : verbe savant pour dire qu'on donne une valeur à quelque chose. Contexte ici : donner une valeur à une variable.</p>
+                                    <p>Dans l'exemple ici : on donne la valeur <code>2</code> à la variable <code>x</code>.</p>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <hr class="m-0" />
+            <!-- If/else-->
+            <section class="resume-section" id="condition">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Condition / if-else</h2>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">Comment faire en sorte que l'affichage dans le if s'affiche ?</h3>
+                            <div class="subheading mb-3">Complète l'élément manquant.</div>
+                            <form action="javascript:valider_texte('04');">
+                                <code>
+                                    y = 10<br>
+                                    if y == <input type='text' id="q_04_reponse_1" name='q_04_reponse_text'> :<br>
+                                        print("Le giga-message super cool de la Terre. PS : J'ai les haricots.")
+                                </code><br>
+                                <input type='hidden' value='10' name='q_04_reponse' id='q_04_reponse'>
+                                <input type='submit' value='Valider' class="btn btn-primary">
+                            </form>
+                            <br>
+                            <span style="display:none" id="q_03_solution">
+                                <div>
+                                    <p>Solution : 10.</p>
+                                    <p>En effet, même si <i>Jojo Bizarre Adventure</i> est le meilleur animé, pour qu'un <code>if</code>.</p>
+                                </div>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <hr class="m-0" />
+            <!-- Boucle while-->
+            <section class="resume-section" id="boucle_while">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Boucle / while</h2>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">University of Colorado Boulder</h3>
+                            <div class="subheading mb-3">Bachelor of Science</div>
+                            <div>Computer Science - Web Development Track</div>
+                            <p>GPA: 3.23</p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">August 2006 - May 2010</span></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">James Buchanan High School</h3>
+                            <div class="subheading mb-3">Technology Magnet Program</div>
+                            <p>GPA: 3.56</p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">August 2002 - May 2006</span></div>
+                    </div>
+                </div>
+            </section>
+            <!-- Education-->
+            <section class="resume-section" id="boucle_for">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Boucle / for</h2>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">University of Colorado Boulder</h3>
+                            <div class="subheading mb-3">Bachelor of Science</div>
+                            <div>Computer Science - Web Development Track</div>
+                            <p>GPA: 3.23</p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">August 2006 - May 2010</span></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">James Buchanan High School</h3>
+                            <div class="subheading mb-3">Technology Magnet Program</div>
+                            <p>GPA: 3.56</p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">August 2002 - May 2006</span></div>
+                    </div>
+                </div>
+            </section>
+            <!-- Education-->
+            <section class="resume-section" id="fonction">
+                <div class="resume-section-content">
+                    <h2 class="mb-5">Fonction / def</h2>
+                    <div class="d-flex flex-column flex-md-row justify-content-between mb-5">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">University of Colorado Boulder</h3>
+                            <div class="subheading mb-3">Bachelor of Science</div>
+                            <div>Computer Science - Web Development Track</div>
+                            <p>GPA: 3.23</p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">August 2006 - May 2010</span></div>
+                    </div>
+                    <div class="d-flex flex-column flex-md-row justify-content-between">
+                        <div class="flex-grow-1">
+                            <h3 class="mb-0">James Buchanan High School</h3>
+                            <div class="subheading mb-3">Technology Magnet Program</div>
+                            <p>GPA: 3.56</p>
+                        </div>
+                        <div class="flex-shrink-0"><span class="text-primary">August 2002 - May 2006</span></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>
